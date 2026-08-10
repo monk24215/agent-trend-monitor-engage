@@ -1,0 +1,62 @@
+{
+  "date": "2026-08-09",
+  "signals": [
+    {
+      "id": "sig-0001",
+      "headline_or_topic": "Wool blanket vs modern sleep system for winter bushcraft",
+      "source_id": "survival-blog",
+      "captured_at": "2026-08-09T12:00:00Z",
+      "tags": [
+        "gear",
+        "winter"
+      ]
+    },
+    {
+      "id": "sig-0002",
+      "headline_or_topic": "Cheap ferro rod fire-starting techniques that work",
+      "source_id": "survival-life",
+      "captured_at": "2026-08-09T12:00:00Z",
+      "tags": [
+        "fire",
+        "skills"
+      ]
+    },
+    {
+      "id": "sig-0003",
+      "headline_or_topic": "Building a gravity-fed water filter from scratch",
+      "source_id": "offgrid-survival",
+      "captured_at": "2026-08-09T12:00:00Z",
+      "tags": [
+        "water"
+      ]
+    },
+    {
+      "id": "sig-0004",
+      "headline_or_topic": "Long-term food storage mistakes that ruin your supply",
+      "source_id": "survival-blog",
+      "captured_at": "2026-08-09T12:00:00Z",
+      "tags": [
+        "food",
+        "storage"
+      ]
+    },
+    {
+      "id": "sig-0005",
+      "headline_or_topic": "Solar backup power setups for a weekend cabin",
+      "source_id": "offgrid-survival",
+      "captured_at": "2026-08-09T12:00:00Z",
+      "tags": [
+        "power"
+      ]
+    },
+    {
+      "id": "sig-0006",
+      "headline_or_topic": "Ray Mears on the three knots every bushcrafter needs",
+      "source_id": "survival-life",
+      "captured_at": "2026-08-09T12:00:00Z",
+      "tags": [
+        "skills"
+      ]
+    }
+  ]
+}
