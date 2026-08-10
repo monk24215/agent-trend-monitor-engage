@@ -1,0 +1,19 @@
+{
+  "_comment": "PERFORMANCE FEEDBACK — how previously-shipped topics performed. This is what lets patterns AND resources earn promotion. Even a manual 'landed / didn't' is enough to start; add real metrics later without changing the shape.",
+  "date": "YYYY-MM-DD",
+  "feedback": [
+    {
+      "topic_id": "the id from a prior daily/YYYY-MM-DD.json output",
+      "shipped_on": "YYYY-MM-DD",
+      "outcome": "good",
+      "_outcome_values": ["good", "neutral", "poor"],
+      "metrics": {
+        "_comment": "optional and flexible — fill what you have, leave the rest",
+        "clicks": null,
+        "engagement_rate": null,
+        "conversions": null
+      },
+      "note": "optional freeform"
+    }
+  ]
+}

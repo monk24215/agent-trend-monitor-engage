@@ -1,0 +1,96 @@
+{
+  "_comment": "REAL product catalog. Hoplinks use the affiliate redirect sl.defendsurviveprepare.com/<vendor-slug> so commissions track to you. 'liked_aspects' and keywords are written toward the practical/preparedness angle (not fear/conspiracy framing) for ad and email deliverability. Set active:false on any product you don't want the agent to use.",
+  "products": [
+    {
+      "id": "prod-alphadrop",
+      "name": "Hide Anything Anywhere",
+      "one_liner": "A 227-page protocol for concealing food, supplies, and valuables in a normal home using search psychology.",
+      "liked_aspects": [
+        "protects a stockpile you've already built",
+        "works in ordinary houses and apartments, no bunker or construction",
+        "practical room-by-room system with worksheets"
+      ],
+      "keywords": ["hide", "conceal", "storage", "stockpile", "opsec", "security", "cache", "privacy", "theft"],
+      "clickbank": {"hoplink": "https://sl.defendsurviveprepare.com/alphadrop", "vendor_id": "alphadrop"},
+      "active": true
+    },
+    {
+      "id": "prod-blackoutp",
+      "name": "Blackout Protocol Survival System",
+      "one_liner": "A step-by-step system for keeping heat, water, food, and light during blackouts and grid failure.",
+      "liked_aspects": [
+        "keeps a family warm and fed during power outages",
+        "uses low-cost tools you already own",
+        "clear step-by-step actions for the first 72 hours"
+      ],
+      "keywords": ["blackout", "power", "grid", "outage", "emp", "heat", "energy", "cold", "winter"],
+      "clickbank": {"hoplink": "https://sl.defendsurviveprepare.com/blackoutp", "vendor_id": "blackoutp"},
+      "active": true
+    },
+    {
+      "id": "prod-darkreset",
+      "name": "Dark Reset: Survival Before the Silence",
+      "one_liner": "An all-around preparedness guide covering food, water, medicine, and home security when systems fail.",
+      "liked_aspects": [
+        "covers food, water, medicine, and defense in one plan",
+        "written for regular families, no special gear",
+        "practical steps you can complete in a weekend"
+      ],
+      "keywords": ["collapse", "preparedness", "food", "water", "medicine", "defense", "family", "grid"],
+      "clickbank": {"hoplink": "https://sl.defendsurviveprepare.com/darkreset", "vendor_id": "darkreset"},
+      "active": true
+    },
+    {
+      "id": "prod-docsrem10",
+      "name": "The Doctor's Book of Survival Home Remedies",
+      "one_liner": "A doctor-written collection of science-backed herbal remedies for common health issues when medications aren't available.",
+      "liked_aspects": [
+        "written and vetted by a licensed doctor",
+        "remedies for the 20 most common health problems",
+        "uses herbs and items you can grow or find locally"
+      ],
+      "keywords": ["medicine", "remedy", "herbal", "health", "first aid", "antibiotic", "infection", "pain", "medication", "pharmacy"],
+      "clickbank": {"hoplink": "https://sl.defendsurviveprepare.com/docsrem10", "vendor_id": "docsrem10"},
+      "active": true
+    },
+    {
+      "id": "prod-fight4fam",
+      "name": "Fight for Family Self-Defense",
+      "one_liner": "A family self-defense program teaching simple techniques to stop an attacker without weapons or strength.",
+      "liked_aspects": [
+        "techniques the whole family can learn, including kids",
+        "no weapons or physical strength required",
+        "master core moves in a few hours"
+      ],
+      "keywords": ["self-defense", "defense", "attacker", "protect", "family", "safety", "fighting"],
+      "clickbank": {"hoplink": "https://sl.defendsurviveprepare.com/fight4fam", "vendor_id": "fight4fam"},
+      "active": true
+    },
+    {
+      "id": "prod-freepow",
+      "name": "Free Power Secrets",
+      "one_liner": "DIY video and blueprints to build a compact fuel generator for backup power in a small space.",
+      "liked_aspects": [
+        "build your own backup power source cheaply",
+        "works in limited space",
+        "step-by-step blueprints and materials list"
+      ],
+      "keywords": ["power", "generator", "energy", "electricity", "backup", "diy", "off-grid", "fuel"],
+      "clickbank": {"hoplink": "https://sl.defendsurviveprepare.com/freepow", "vendor_id": "freepow"},
+      "active": true
+    },
+    {
+      "id": "prod-uswater1",
+      "name": "Joseph's Well",
+      "one_liner": "DIY plans to build a low-cost atmospheric water generator that pulls drinkable water from the air.",
+      "liked_aspects": [
+        "produces drinking water without a well or plumbing",
+        "builds for a fraction of commercial units",
+        "runs on-grid or off-grid on a small solar setup"
+      ],
+      "keywords": ["water", "drought", "well", "hydration", "filter", "purify", "off-grid", "solar", "storage"],
+      "clickbank": {"hoplink": "https://sl.defendsurviveprepare.com/uswater1", "vendor_id": "uswater1"},
+      "active": true
+    }
+  ]
+}

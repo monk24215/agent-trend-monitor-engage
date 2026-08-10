@@ -1,0 +1,20 @@
+# DOMAIN REFERENCE — Layer 0 (human-edited; slow-changing)
+#
+# Standing reference data about the domain (survival / bushcraft / preparedness).
+# NOT signals. This informs SCORING — a signal that quotes or concerns a
+# recognized authority is weighted as more credible/relevant by the Assessor.
+# Update by hand when the domain's landscape shifts; not on the agent's initiative.
+
+domain: "survival / bushcraft / preparedness"
+
+authorities:
+  - name: "Les Stroud"
+    note: "Survivorman; primitive/solo survival"
+  - name: "Ray Mears"
+    note: "bushcraft, woodlore"
+  - name: "David Canterbury"
+    note: "bushcraft, gear/kit, 'Dual Survival'"
+
+# How the Assessor uses this (kept here so the rule travels with the data):
+# - mention of an authority in a signal -> relevance bonus
+# - authorities are also candidate DERIVATION angles (e.g. "what X would pack")

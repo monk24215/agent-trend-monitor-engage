@@ -1,0 +1,128 @@
+"""PUBLISHER — a delivery edge, separate from the engine.
+Reads a daily output JSON and renders a newsroom-style HTML brief.
+The agents produce data; this formats it. Swap this out (email, Slack) without
+touching the pipeline.
+
+Design brief: a survival/preparedness field dispatch. Utilitarian, high-contrast,
+dossier-styled — reads like a briefing, not a blog. Discovery = "THE FIELD"
+(what's happening); Derived = "THE ANGLE" (topic crossed with an offer).
+"""
+from __future__ import annotations
+import os, html, json
+from .core import DAILY, read_json
+
+CSS = """
+:root{
+  --ink:#e8e4d8; --dim:#8a8578; --line:#2b2a26; --bg:#12110f; --panel:#1a1916;
+  --alert:#c9552e; --go:#8a9a56; --faint:#5a564d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+  line-height:1.45;padding:32px 20px;max-width:720px;margin:0 auto}
+.mast{border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:6px;
+  display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
+.mast h1{font-size:22px;letter-spacing:2px;text-transform:uppercase;font-weight:800}
+.mast .date{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:12px;
+  color:var(--dim);letter-spacing:1px}
+.tag{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:2px;
+  color:var(--bg);background:var(--ink);padding:2px 7px;border-radius:2px;text-transform:uppercase}
+section{margin-top:30px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-head h2{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--dim);white-space:nowrap}
+.sec-head .rule{height:1px;background:var(--line);flex:1}
+.item{padding:0 0 0 14px;margin-bottom:18px;border-left:1px solid var(--line)}
+/* headline is the hero */
+.item h3{font-size:20px;font-weight:600;margin:0 0 5px;line-height:1.28}
+.meta{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:var(--dim);
+  letter-spacing:.3px;display:flex;gap:12px;flex-wrap:wrap;align-items:baseline}
+.id{color:var(--faint)}
+.cat{color:var(--go);text-transform:uppercase}
+.src{color:var(--faint)}
+.offer{color:var(--alert)}
+.offer a{color:var(--alert);text-decoration:none;border-bottom:1px dotted var(--alert)}
+footer{margin-top:34px;padding-top:12px;border-top:1px solid var(--line);
+  font-family:ui-monospace,Menlo,monospace;font-size:10px;color:var(--faint);
+  letter-spacing:1px;text-transform:uppercase;text-align:center}
+"""
+
+
+def _esc(s):
+    return html.escape(str(s or ""))
+
+
+def _items(rows, kind, catalog):
+    out = []
+    for i, r in enumerate(rows, 1):
+        h = _esc(r.get("headline"))
+        cat = _esc(r.get("category"))
+        item_id = _esc(r.get("id"))
+        srcs = ", ".join(_esc(s) for s in r.get("source_signals", []))
+        meta = [f'<span class="cat">{cat}</span>']
+        if srcs:
+            meta.append(f'<span class="src">from {srcs}</span>')
+        if r.get("product_id"):
+            prod = catalog.get(r["product_id"], {})
+            name = _esc(prod.get("name", r["product_id"]))
+            link = prod.get("clickbank", {}).get("hoplink")
+            if link:
+                meta.append(f'<span class="offer">&rarr; <a href="{_esc(link)}">{name}</a></span>')
+            else:
+                meta.append(f'<span class="offer">&rarr; {name}</span>')
+        out.append(
+            f'<div class="item"><h3>{h}</h3>'
+            f'<div class="meta"><span class="id">{item_id}</span>{"".join(meta)}</div></div>'
+        )
+    return "\n".join(out)
+
+
+def _load_catalog_map():
+    for cand in ["product_catalog.json", os.path.join("templates", "product_catalog.template.json")]:
+        p = os.path.join(os.path.dirname(DAILY), "inputs", cand)
+        if os.path.exists(p):
+            prods = read_json(p).get("products", [])
+            return {x["id"]: x for x in prods}
+    return {}
+
+
+def render_html(daily_doc: dict, catalog: dict | None = None) -> str:
+    catalog = catalog if catalog is not None else _load_catalog_map()
+    day = _esc(daily_doc.get("run_id"))
+    disc = _items(daily_doc.get("discovery", []), "discovery", catalog)
+    deriv = _items(daily_doc.get("derived", []), "derived", catalog)
+    return f"""<!doctype html><html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Brief — {day}</title><style>{CSS}</style></head><body>
+<div class="mast"><h1>Daily Brief</h1><span class="date">{day} &nbsp;·&nbsp; 10 SIGNALS</span></div>
+<span class="tag">Trend Monitor · Engage</span>
+<section><div class="sec-head"><h2>The Field — What's Moving</h2><div class="rule"></div></div>
+{disc}</section>
+<section><div class="sec-head"><h2>The Angle — Topic × Offer</h2><div class="rule"></div></div>
+{deriv}</section>
+<footer>Generated by TMEA · Review before publishing · Not for distribution</footer>
+</body></html>"""
+
+
+def publish(run_id: str | None = None) -> str:
+    """Render the given day's brief (default: latest) to daily/<id>.html."""
+    if run_id is None:
+        import glob
+        files = sorted(glob.glob(os.path.join(DAILY, "*.json")))
+        if not files:
+            raise FileNotFoundError("no daily output to publish")
+        path = files[-1]
+    else:
+        path = os.path.join(DAILY, f"{run_id}.json")
+    doc = read_json(path)
+    out_html = render_html(doc)
+    out_path = os.path.splitext(path)[0] + ".html"
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write(out_html)
+    return out_path
+
+
+if __name__ == "__main__":
+    import sys
+    rid = sys.argv[1] if len(sys.argv) > 1 else None
+    print("brief written:", publish(rid))

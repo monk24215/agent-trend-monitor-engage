@@ -1,0 +1,24 @@
+{
+  "_comment": "CURRENT SIGNALS — the raw material the Assessor scores. Fill by hand today; an API can emit this exact shape later. One object per signal. NOTE: sources live in resource_registry.yaml (reference by source_id); domain authorities live in domain_reference.yaml. Do NOT put those here.",
+  "date": "2026-08-09",
+  "signals": [
+    {
+      "id": "sig-0001",
+      "headline_or_topic": "Wool blanket vs. modern sleep system for winter bushcraft",
+      "source_id": "survival-blog",
+      "url": "https://survivalblog.com/some-article",
+      "captured_at": "2026-08-09T14:30:00Z",
+      "raw_note": "traditional-vs-modern framing tends to perform; David Canterbury angle possible",
+      "tags": ["gear", "winter", "shelter"]
+    },
+    {
+      "id": "sig-0002",
+      "headline_or_topic": "Example: a second signal you saw the same day",
+      "source_id": "offgrid-survival",
+      "url": "https://offgridsurvival.com/...",
+      "captured_at": "2026-08-09T15:05:00Z",
+      "raw_note": "",
+      "tags": []
+    }
+  ]
+}
