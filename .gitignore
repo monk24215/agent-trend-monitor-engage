@@ -7,6 +7,7 @@
 inputs/signals.json
 inputs/product_catalog.json
 inputs/feedback.json
+inputs/templates/__pro*
 
 # --- generated output & history ---
 daily/*.json
