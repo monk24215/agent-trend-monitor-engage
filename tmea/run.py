@@ -101,6 +101,16 @@ def run(signals_path: str | None = None) -> str:
     except Exception as e:
         ctx.log("publish", {"status": "skipped", "reason": str(e)})
 
+    # Sync today's headlines into content_log.csv (a delivery edge, not engine
+    # logic). Only ADDS new rows — never touches decisions a human already
+    # made, and never sets decision itself; see tmea/contentlog.py.
+    try:
+        from .contentlog import sync as sync_content_log
+        log_path = sync_content_log()
+        ctx.log("content_log", {"path": log_path})
+    except Exception as e:
+        ctx.log("content_log", {"status": "skipped", "reason": str(e)})
+
     ctx.log("run_end", {"output": out_path})
     return out_path
 

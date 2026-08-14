@@ -12,6 +12,8 @@ inputs/templates/__pro*
 # --- generated output & history ---
 daily/*.json
 daily/store/
+daily/index.html
+content_log.csv
 build_log/log.jsonl
 
 # --- cold-store runtime writes (keep the seed files, ignore growth) ---
