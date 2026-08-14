@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — K.M. Oubre</title>
+<meta name="description" content="A working portfolio of shipped tools, sites, and infrastructure.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=PT+Sans:wght@400;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#111014; --panel:#1a1920; --card:#191820;
+    --ink:#ECE7D8; --dim:#8f8a7e; --faint:#5a564d; --line:#2a2830;
+    --accent:#CC5A31; --go:#9AAE5E; --radius:12px;
+    --fh:"Oswald",system-ui,sans-serif; --ht:"Roboto",system-ui,sans-serif; --bt:"PT Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--bt);line-height:1.55;
+    -webkit-font-smoothing:antialiased;padding:0}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px}
+  .wrap--narrow{max-width:760px}
+  a{color:inherit;text-decoration:none}
+  .breadcrumb{font-family:var(--fh);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--dim);margin-bottom:36px}
+  .breadcrumb a:hover{color:var(--accent)}
+  .eyebrow{font-family:var(--fh);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--go);margin-bottom:10px}
+  .intro,.hero{margin-bottom:34px;padding-bottom:26px;border-bottom:1px solid var(--line)}
+  h1{font-family:var(--ht);font-weight:700;font-size:40px;letter-spacing:-.5px;margin-bottom:12px;line-height:1.05}
+  .tagline{color:var(--dim);font-size:17px;max-width:60ch}
+  /* filters */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .filter{font-family:var(--fh);font-size:12px;letter-spacing:1px;text-transform:uppercase;
+    background:transparent;color:var(--dim);border:1px solid var(--line);border-radius:20px;
+    padding:6px 15px;cursor:pointer;transition:all .15s}
+  .filter:hover{color:var(--ink);border-color:var(--dim)}
+  .filter.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+  .card{display:block;position:relative;background:var(--card);border:1px solid var(--line);
+    border-radius:var(--radius);padding:22px 22px 20px;transition:border-color .18s,transform .18s;cursor:pointer}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card__head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+  .card__title{font-family:var(--ht);font-weight:500;font-size:19px}
+  .card__year{font-family:var(--fh);font-size:12px;color:var(--faint);letter-spacing:1px}
+  .card__tagline{color:var(--dim);font-size:14px;margin-bottom:16px}
+  .card__stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .card__stack span{font-family:var(--fh);font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;
+    color:var(--dim);border:1px solid var(--line);border-radius:4px;padding:3px 7px}
+  .card__status{font-family:var(--fh);font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--faint)}
+  .card__status.live::before{content:"● ";color:var(--go)}
+  .card__status.in-progress::before{content:"● ";color:var(--accent)}
+  .card__status.archived::before{content:"● ";color:var(--faint)}
+  .empty{color:var(--dim);padding:40px;text-align:center;font-size:15px}
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
+  footer a:hover{color:var(--accent)}
+  /* ---- project detail (rendered inside overlay) ---- */
+  .detail{padding:34px 34px 40px}
+  .detail .eyebrow{margin-bottom:8px}
+  .detail h1{font-size:30px;margin-bottom:10px}
+  .detail .tagline{font-size:16px;margin-bottom:20px}
+  .detail .links{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+  .btn{font-family:var(--fh);font-size:12px;letter-spacing:1px;text-transform:uppercase;
+    border:1px solid var(--line);border-radius:6px;padding:9px 16px;color:var(--ink);transition:all .15s;cursor:pointer}
+  .btn:hover{border-color:var(--dim)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{filter:brightness(1.08)}
+  .detail .ustack{display:flex;flex-wrap:wrap;gap:7px;list-style:none;margin-bottom:30px}
+  .detail .ustack li{font-family:var(--fh);font-size:11px;letter-spacing:.5px;text-transform:uppercase;
+    color:var(--dim);border:1px solid var(--line);border-radius:5px;padding:4px 9px}
+  .detail section{margin-bottom:26px}
+  .detail h2{font-family:var(--fh);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--go);margin-bottom:10px}
+  .detail p{color:var(--dim);font-size:15px}
+  .detail em{color:var(--ink);font-style:italic}
+  .detail strong{color:var(--ink)}
+  .features{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+  .feature{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px}
+  .feature h3{font-family:var(--ht);font-weight:500;font-size:15px;margin-bottom:6px;color:var(--ink)}
+  .feature p{font-size:13px}
+  .stack-grid{display:grid;grid-template-columns:130px 1fr;gap:8px 16px;font-size:14px}
+  .stack-grid dt{font-family:var(--fh);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);padding-top:2px}
+  .stack-grid dd{color:var(--dim)}
+  @media(max-width:640px){.features{grid-template-columns:1fr}.stack-grid{grid-template-columns:1fr}.detail{padding:22px}}
+  /* ---- overlay ---- */
+  body.smo-lock{overflow:hidden}
+  .smo{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;
+    padding:clamp(12px,4vw,48px);background:rgba(6,6,9,.74);backdrop-filter:blur(4px);opacity:0;transition:opacity .18s}
+  .smo.open{display:flex;opacity:1}
+  .smo-win{position:relative;width:min(980px,100%);height:min(88vh,900px);display:flex;flex-direction:column;
+    background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:0 24px 80px rgba(0,0,0,.55);overflow:hidden;transform:translateY(8px) scale(.99);transition:transform .2s}
+  .smo.open .smo-win{transform:none}
+  .smo-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;
+    border-bottom:1px solid var(--line);background:var(--panel);flex:0 0 auto}
+  .smo-title{font-family:var(--fh);font-size:13px;letter-spacing:1.5px;text-transform:uppercase}
+  .smo-close{border:1px solid var(--line);background:transparent;color:var(--dim);width:30px;height:30px;
+    border-radius:6px;cursor:pointer;font-size:14px;line-height:1;transition:all .14s}
+  .smo-close:hover{color:var(--accent);border-color:var(--accent)}
+  .smo-body{flex:1 1 auto;overflow-y:auto}
+  .smo-esc{flex:0 0 auto;padding:7px 16px;text-align:center;font-size:11px;letter-spacing:.5px;
+    color:var(--faint);border-top:1px solid var(--line);background:var(--panel)}
+  @media(max-width:640px){.smo-win{height:92vh}.smo-esc{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; Projects</nav>
+  <header class="intro">
+    <div class="eyebrow">Portfolio</div>
+    <h1>Projects</h1>
+    <p class="tagline">A working portfolio. Shipped tools, sites, and infrastructure I've built and run.</p>
+  </header>
+  <div class="filters" id="filters" role="tablist" aria-label="Filter projects by status"></div>
+  <div class="grid" id="grid"><div class="empty">Loading…</div></div>
+  <footer><p>K.M. Oubre · <a href="/">wiredHowse</a></p></footer>
+</div>
+
+<script>
+/* ---- projects data (edit here — add new objects to the top) ---- */
+const PROJECTS = [
+  {
+    slug:"trend-monitor-engage",
+    title:"Trend Monitor Engage Agent",
+    tagline:"A daily AI agent that surfaces 5 trend topics + 5 product-matched angles as a newsroom brief.",
+    year:2026, status:"live",
+    stack:["Python 3.11","Multi-agent pipeline","Provider-agnostic LLM","JSON-schema I/O","Static HTML output"],
+    live_url:"https://github.com/wirehouseworkers/agent-trend-monitor-engage",
+    repo_url:"https://github.com/wirehouseworkers/agent-trend-monitor-engage",
+    detail:{
+      pitch:"A single-purpose AI agent that runs every day, surfaces the five trends most worth writing about, and crosses each against a product catalog to produce five affiliate-ready angles — published as a traceable newsroom brief. Built for content operators who want to start the day with decisions, not a blank page.",
+      problem:"Content operators in a niche hit the same wall every morning: what do I write about today, and how does it connect to something I actually earn on? Generic AI tools produce endless copy but no <em>judgment</em> — they don't know your sources, audience, or offers. The gap wasn't writing. It was the daily editorial decision that comes before writing, made consistently and tied to a real catalog.",
+      does:"Once a day the agent ingests signals from a trusted source list and scores each for audience relevance. It produces two ranked lists: five <strong>discovery</strong> topics (what's most useful right now) and five <strong>derived</strong> topics (each trend crossed with a product's valued aspects to form an honest headline angle). Output is a newsroom-style HTML brief where every item carries its ID, category, source signal, and — for derived items — a live affiliate link. Inputs are hand-editable JSON today, API-fed tomorrow, with zero downstream change.",
+      features:[
+        ["Fixed core, swappable edge","An immutable constitution (purpose, protocols, refusals) is architecturally separated from a mutable layer of learned patterns — simple in purpose while it grows in capability."],
+        ["Five-agent pipeline","Assessor, Categorizer, Discovery, Derivation, and Documenter/Learner each do one job on a deterministic orchestrator that enforces invariants mid-run."],
+        ["Anti-cruft by design","Hard caps force the system to demote before it promotes; one lifecycle governs patterns, resources, and time-boxed events — nothing deleted, only archived."],
+        ["Model at the edge only","A provider-agnostic seam isolates the model to the steps that need judgment; a deterministic mock runs the whole pipeline with no credentials, and every call is logged."]
+      ],
+      stackrows:[
+        ["Runtime","Python 3.11"],
+        ["Backend","Five-agent pipeline, provider-agnostic LLM interface with deterministic mock, append-only build log"],
+        ["Frontend","Static HTML/CSS newsroom brief — no build step, opens in any browser"],
+        ["Storage","Versioned constitution files, JSON daily output, JSONL event log, YAML registries"],
+        ["Deployment","Scheduled backend process; single self-contained bootstrap script rebuilds the full tree"],
+        ["Other","JSON-schema validated inputs, ClickBank affiliate integration, three delivery patterns"]
+      ],
+      status_line:"Active 2026"
+    }
+  },
+  {
+    slug:"listmonk-templates",
+    title:"Free Listmonk Email Templates",
+    tagline:"Five free, open-source, responsive email templates for listmonk. No account, no paywall.",
+    year:2026, status:"live",
+    stack:["HTML5","Responsive CSS","listmonk","Go templates","Static host"],
+    live_url:"https://freetemplates.wiredhowse.app",
+    repo_url:"https://github.com/monk24215/free-templates-wiredhowse",
+    detail:{
+      pitch:"Five production-ready, responsive email templates for listmonk — newsletter, editorial, transactional, plain, and promotional — given away free and open-source. Copy the HTML, paste into listmonk, done. No signup, no paywall, campaign content injects automatically.",
+      problem:"listmonk is a powerful open-source newsletter tool, but it ships without polished templates — and most good email templates sit behind SaaS paywalls or account walls. Small senders needed clean, deliverable, drop-in designs without paying a subscription or handing over an email address.",
+      does:"A static site hosting five hand-built templates, each a different tone: a dark-header newsletter, a newspaper-masthead editorial, a card-style transactional receipt, a plain human-looking layout for high engagement, and a dark promotional theme with a gold accent band. Each uses only listmonk's safe template variables and the required content-injection block, so they work across listmonk versions with no editing.",
+      features:[
+        ["Five distinct tones","Newsletter, editorial, transactional, plain, and promotional — each designed for a specific kind of send and audience expectation."],
+        ["Version-safe variables","Templates use only the always-available listmonk variables, with guarded optionals, so they don't break across versions."],
+        ["Zero build step","Pure static HTML. Copy from the file, paste into listmonk as a raw HTML campaign template, save."],
+        ["Genuinely free","No account, no paywall, MIT-style open source — PRs welcome to add more templates."]
+      ],
+      stackrows:[
+        ["Runtime","None — pure static"],
+        ["Backend","listmonk Go templating (`{{ template \"content\" . }}` injection)"],
+        ["Frontend","Hand-written responsive HTML/CSS email markup"],
+        ["Storage","Static files"],
+        ["Deployment","Railway or any static host (Netlify, Vercel, Cloudflare Pages, S3)"],
+        ["Other","Two live domains, contribution guide, safe-variable reference"]
+      ],
+      status_line:"Live 2026"
+    }
+  }
+];
+
+/* ---- render ---- */
+const grid=document.getElementById('grid'), filters=document.getElementById('filters');
+PROJECTS.sort((a,b)=>(b.year||0)-(a.year||0));
+const statuses=['all',...new Set(PROJECTS.map(p=>p.status).filter(Boolean))];
+let active='all';
+const cap=s=>s.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function renderFilters(){
+  filters.innerHTML=statuses.map(s=>`<button class="filter${s===active?' active':''}" data-s="${s}">${cap(s)}</button>`).join('');
+  filters.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{active=b.dataset.s;renderFilters();renderGrid();});
+}
+function renderGrid(){
+  const list=active==='all'?PROJECTS:PROJECTS.filter(p=>p.status===active);
+  if(!list.length){grid.innerHTML='<div class="empty">No projects match this filter.</div>';return;}
+  grid.innerHTML=list.map((p,i)=>{
+    const stack=(p.stack||[]).slice(0,5).map(s=>`<span>${esc(s)}</span>`).join('');
+    const status=p.status?`<span class="card__status ${esc(p.status)}">${esc(p.status.replace(/-/g,' '))}</span>`:'';
+    const year=p.year?`<span class="card__year">${esc(p.year)}</span>`:'';
+    return `<div class="card" data-i="${PROJECTS.indexOf(p)}">
+      <div class="card__head"><h3 class="card__title">${esc(p.title)}</h3>${year}</div>
+      <p class="card__tagline">${esc(p.tagline||'')}</p>
+      <div class="card__stack">${stack}</div>${status}</div>`;
+  }).join('');
+  grid.querySelectorAll('.card').forEach(c=>c.onclick=()=>openModal(PROJECTS[+c.dataset.i]));
+}
+
+/* ---- detail HTML built from data ---- */
+function detailHTML(p){
+  const d=p.detail;
+  const feats=d.features.map(f=>`<div class="feature"><h3>${esc(f[0])}</h3><p>${f[1]}</p></div>`).join('');
+  const rows=d.stackrows.map(r=>`<dt>${esc(r[0])}</dt><dd>${r[1]}</dd>`).join('');
+  const ustack=(p.stack||[]).map(s=>`<li>${esc(s)}</li>`).join('');
+  return `<div class="detail">
+    <div class="eyebrow">Project · ${esc(p.year)}</div>
+    <h1>${esc(p.title)}</h1>
+    <p class="tagline">${d.pitch}</p>
+    <div class="links">
+      <a class="btn primary" href="${esc(p.live_url)}" target="_blank" rel="noopener">Open live →</a>
+      <a class="btn" href="${esc(p.repo_url)}" target="_blank" rel="noopener">View source</a>
+    </div>
+    <ul class="ustack">${ustack}</ul>
+    <section><h2>The problem</h2><p>${d.problem}</p></section>
+    <section><h2>What it does</h2><p>${d.does}</p></section>
+    <section><h2>Engineering highlights</h2><div class="features">${feats}</div></section>
+    <section><h2>Stack</h2><dl class="stack-grid">${rows}</dl></section>
+  </div>`;
+}
+
+/* ---- overlay ---- */
+let modal=null;
+function ensureModal(){
+  if(modal)return modal;
+  modal=document.createElement('div');modal.className='smo';modal.setAttribute('role','dialog');modal.setAttribute('aria-modal','true');
+  modal.innerHTML=`<div class="smo-win">
+    <div class="smo-bar"><div class="smo-title"></div><button class="smo-close" aria-label="Close">&#10005;</button></div>
+    <div class="smo-body"></div><div class="smo-esc">Press ESC to close</div></div>`;
+  modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+  modal.querySelector('.smo-close').onclick=closeModal;
+  document.body.appendChild(modal);return modal;
+}
+function openModal(p){
+  const m=ensureModal();
+  m.querySelector('.smo-title').textContent=p.title;
+  m.querySelector('.smo-body').innerHTML=detailHTML(p);
+  m.querySelector('.smo-body').scrollTop=0;
+  m.classList.add('open');document.body.classList.add('smo-lock');
+}
+function closeModal(){if(modal){modal.classList.remove('open');document.body.classList.remove('smo-lock');}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+renderFilters();renderGrid();
+</script>
+</body>
+</html>
