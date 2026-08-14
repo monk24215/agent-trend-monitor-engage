@@ -1,0 +1,34 @@
+# RESOURCE REGISTRY — Layer 1 (mutable; promoted sources only, cap 8)
+#
+# The Assessor gathers current_signals ONLY from resources listed here.
+# Candidates and archived resources live in 02_cold_store/resources.yaml.
+
+resources:
+  - id: "survival-blog"
+    kind: "manual_list"          # rss | search_query | api | manual_list
+    locator: "https://survivalblog.com"
+    state: "promoted"
+    promoted_on: "2026-08-09"
+    perf_streak: 0               # consecutive judged-good weeks
+    notes: "seed source"
+  - id: "survival-life"
+    kind: "manual_list"
+    locator: "https://survivallife.com"
+    state: "promoted"
+    promoted_on: "2026-08-09"
+    perf_streak: 0
+    notes: "seed source"
+  - id: "offgrid-survival"
+    kind: "manual_list"
+    locator: "https://offgridsurvival.com"
+    state: "promoted"
+    promoted_on: "2026-08-09"
+    perf_streak: 0
+    notes: "seed source"
+  - id: "fox"
+    kind: "manual_list"
+    locator: "https://fox.com"
+    state: "promoted"
+    promoted_on: "2026-08-09"
+    perf_streak: 0
+    notes: "seed source; general news, filter hard for domain relevance"

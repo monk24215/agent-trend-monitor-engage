@@ -1,0 +1,44 @@
+{
+  "_comment": "PRODUCT/SERVICE CATALOG — the Derivation Generator crosses current signals against these. 'liked_aspects' is the hook: what the audience values, which is what makes a derived topic land. The entries below are PLACEHOLDERS in the survival/ClickBank niche — overwrite id, name, one_liner, and hoplink with YOUR actual products.",
+  "products": [
+    {
+      "id": "prod-0001",
+      "name": "[PLACEHOLDER] Backyard survival/food-independence guide",
+      "one_liner": "digital guide on growing/storing food off-grid",
+      "liked_aspects": [
+        "self-reliance without a big property",
+        "step-by-step for beginners",
+        "low ongoing cost"
+      ],
+      "keywords": ["food storage", "off-grid", "self-sufficiency", "gardening"],
+      "clickbank": { "hoplink": "https://YOURID.VENDOR.hop.clickbank.net", "vendor_id": "REPLACE" },
+      "active": true
+    },
+    {
+      "id": "prod-0002",
+      "name": "[PLACEHOLDER] Emergency power / off-grid energy blueprint",
+      "one_liner": "DIY guide to backup/independent power",
+      "liked_aspects": [
+        "resilience during outages",
+        "reduces reliance on the grid",
+        "practical DIY build"
+      ],
+      "keywords": ["power outage", "solar", "backup power", "energy"],
+      "clickbank": { "hoplink": "https://YOURID.VENDOR.hop.clickbank.net", "vendor_id": "REPLACE" },
+      "active": true
+    },
+    {
+      "id": "prod-0003",
+      "name": "[PLACEHOLDER] Survival skills / preparedness course",
+      "one_liner": "core bushcraft and emergency-readiness training",
+      "liked_aspects": [
+        "hands-on skills, not just theory",
+        "family/household preparedness",
+        "confidence in the outdoors"
+      ],
+      "keywords": ["bushcraft", "first aid", "shelter", "water", "preparedness"],
+      "clickbank": { "hoplink": "https://YOURID.VENDOR.hop.clickbank.net", "vendor_id": "REPLACE" },
+      "active": true
+    }
+  ]
+}

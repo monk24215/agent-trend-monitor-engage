@@ -1,0 +1,15 @@
+# ENGAGEMENT EVENTS — Layer 1 (mutable; time-boxed priority overrides)
+#
+# Each event temporarily raises a goal's priority for a window, then EXPIRES.
+# While active, both generators tilt discovery + derivation toward event.goal.
+# Expired events auto-move to 02_cold_store (logged), never delete.
+#
+# The Documenter/Learner checks expiry each daily run.
+
+events:
+  # - id: "spring-launch-2026"
+  #   goal: "drive interest toward product X launch"
+  #   priority: 0.7          # 0..1 weight applied on top of baseline scoring
+  #   starts: "2026-03-01"
+  #   expires: "2026-03-21"   # after this date -> archived automatically
+  #   tilt_categories: ["how-to", "comparison"]

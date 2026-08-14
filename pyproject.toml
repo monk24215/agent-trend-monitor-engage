@@ -1,0 +1,16 @@
+[project]
+name = "tmea"
+version = "0.1.0"
+description = "Trend Monitor Engage Agent — daily 5 discovery + 5 derived topics"
+requires-python = ">=3.10"
+dependencies = [
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# Full JSON-Schema validation. Without it, validate_input falls back to a
+# zero-dep minimal check (required-keys only).
+validate = ["jsonschema>=4.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

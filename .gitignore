@@ -1,0 +1,42 @@
+# === TMEA .gitignore ===
+# Principle: the ENGINE and TEMPLATES are tracked (public starter).
+# Your LIVE DATA stays local and out of git.
+
+# --- live inputs (real signals, real ClickBank products, feedback) ---
+# templates ARE tracked; the live files beside them are not.
+inputs/signals.json
+inputs/product_catalog.json
+inputs/feedback.json
+inputs/templates/__pro*
+
+# --- generated output & history ---
+daily/*.json
+daily/store/
+daily/index.html
+content_log.csv
+build_log/log.jsonl
+
+# --- cold-store runtime writes (keep the seed files, ignore growth) ---
+# (uncomment if your archives accumulate real data you don't want public)
+# 02_cold_store/*.yaml
+
+# --- secrets: never commit, even by accident ---
+.env
+*.key
+*_secret*
+provider_local.py
+
+# --- python noise ---
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# --- editor/OS noise ---
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db

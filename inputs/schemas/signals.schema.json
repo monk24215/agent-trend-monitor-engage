@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "signals",
+  "type": "object",
+  "required": ["date", "signals"],
+  "properties": {
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "signals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "headline_or_topic", "source_id"],
+        "properties": {
+          "id": { "type": "string" },
+          "headline_or_topic": { "type": "string", "minLength": 1 },
+          "source_id": { "type": "string" },
+          "url": { "type": "string" },
+          "captured_at": { "type": "string" },
+          "raw_note": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+# AUDIENCE PERSONA — SPINE — Layer 0 (immutable; human-edited only)
+version: 1.0.0
+
+## Core characteristics (unchanging — who they are)
+# e.g. role, life-stage, context. Fill in.
+characteristics: []
+
+## Core beliefs (critical to the audience — violate these and you lose them)
+# The generators must never produce topics that contradict these.
+beliefs: []
+
+## Core activities (slow-changing — what they habitually do)
+# Human-editable, but not on the agent's initiative.
+activities: []
