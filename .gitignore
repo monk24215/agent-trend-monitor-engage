@@ -15,6 +15,7 @@ daily/store/
 daily/index.html
 content_log.csv
 build_log/log.jsonl
+bodies/
 
 # --- cold-store runtime writes (keep the seed files, ignore growth) ---
 # (uncomment if your archives accumulate real data you don't want public)
