@@ -44,6 +44,13 @@ if errorlevel 1 (
 )
 
 echo.
+echo [tmea] Generating email bodies...
+%PY% -m tmea.bodygen
+if errorlevel 1 (
+    echo [tmea] Body generation failed — see error above. Continuing; bodies can be regenerated.
+)
+
+echo.
 echo [tmea] Rebuilding dashboard...
 %PY% -m tmea.dashboard
 
